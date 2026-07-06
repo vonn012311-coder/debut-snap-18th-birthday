@@ -137,10 +137,11 @@ export async function POST(req: NextRequest) {
           webViewLink: result.webViewLink,
         });
       } catch (fileError) {
-        console.error(`Error uploading ${file.name}:`, fileError);
+        const msg = fileError instanceof Error ? fileError.message : String(fileError);
+        console.error(`Error uploading ${file.name}:`, msg);
         errors.push({
           file: file.name,
-          error: "Upload failed, please try again",
+          error: msg, // show real error for debugging
         });
       }
     }
