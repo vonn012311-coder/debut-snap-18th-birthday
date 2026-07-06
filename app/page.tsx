@@ -455,9 +455,6 @@ export default function HomePage() {
           <p className="text-white/20 text-xs">
             Made with 💕 for {eventConfig.debutanteName}'s 18th Birthday
           </p>
-          <a href="/qr-code" className="text-rose-400/40 text-xs underline hover:text-rose-400/70 transition-colors mt-1 block">
-            📱 QR Code for Organizer
-          </a>
         </motion.div>
 
       </div>
