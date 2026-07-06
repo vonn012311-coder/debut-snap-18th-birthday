@@ -2,7 +2,7 @@
 
 /* ============================================================
    SCAN & SNAP – 18th Birthday Edition
-   Global Styles
+   Global Styles — Dark elegant theme
    ============================================================ */
 
 :root {
@@ -10,178 +10,35 @@
   --secondary: #B76E79;
   --accent: #C9A0DC;
   --gold: #D4AF37;
-  --bg-light: #FFF9F5;
-  --bg-card: rgba(255, 255, 255, 0.75);
-  --text-dark: #4A2040;
-  --text-muted: #8B5E7E;
+  --bg: #3b0d2a;
 }
 
-/* Dark mode overrides */
-.dark {
-  --bg-light: #1a0d1a;
-  --bg-card: rgba(40, 15, 40, 0.75);
-  --text-dark: #f5d0e0;
-  --text-muted: #c490b0;
-}
-
-/* Base styles */
 html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-lato), sans-serif;
-  background-color: var(--bg-light);
-  color: var(--text-dark);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: linear-gradient(160deg, #3b0d2a 0%, #5c1a40 50%, #3b0d2a 100%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* Background gradient for light mode */
-body:not(.dark) {
-  background-image:
-    radial-gradient(ellipse at 10% 10%, rgba(232, 160, 191, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse at 90% 90%, rgba(201, 160, 220, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 80%);
-  min-height: 100vh;
-}
-
-/* Background gradient for dark mode */
-.dark body {
-  background-image:
-    radial-gradient(ellipse at 10% 10%, rgba(100, 30, 80, 0.3) 0%, transparent 60%),
-    radial-gradient(ellipse at 90% 90%, rgba(80, 30, 100, 0.3) 0%, transparent 60%);
-}
-
-/* Heading font */
 h1, h2, h3, .font-heading {
   font-family: var(--font-playfair), serif;
 }
 
-/* Glassmorphism card */
-.glass-card {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(232, 160, 191, 0.25);
-  border-radius: 1.5rem;
-  box-shadow:
-    0 8px 32px rgba(183, 110, 121, 0.08),
-    0 1px 0 rgba(255, 255, 255, 0.5) inset;
-}
-
-.dark .glass-card {
-  background: rgba(40, 15, 40, 0.45);
-  border-color: rgba(201, 160, 220, 0.2);
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #E8A0BF 0%, #B76E79 50%, #C9A0DC 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Gold gradient text */
-.gradient-gold {
-  background: linear-gradient(135deg, #D4AF37 0%, #F5D060 50%, #D4AF37 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Primary gradient button */
-.btn-primary {
-  background: linear-gradient(135deg, #E8A0BF 0%, #B76E79 50%, #C9A0DC 100%);
-  color: white;
-  font-weight: 700;
-  padding: 0.875rem 2rem;
-  border-radius: 1rem;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(183, 110, 121, 0.4);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(183, 110, 121, 0.5);
-}
-
-/* Soft divider */
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(232, 160, 191, 0.5), transparent);
-  margin: 1.5rem 0;
-}
-
-/* Decorative rose border */
-.rose-border {
-  border: 1px solid rgba(232, 160, 191, 0.3);
-}
-
-/* Scroll bar styling */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #E8A0BF, #C9A0DC);
-  border-radius: 3px;
+  background: rgba(232, 160, 191, 0.3);
+  border-radius: 2px;
 }
 
-/* Shimmer animation */
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
-}
-
-.shimmer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  animation: shimmer 2s infinite;
-}
-
-/* Pulse glow */
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 10px rgba(232, 160, 191, 0.4); }
-  50% { box-shadow: 0 0 25px rgba(232, 160, 191, 0.8); }
-}
-
-.pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
-}
-
-/* Floating animation */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-}
-
-.float {
-  animation: float 4s ease-in-out infinite;
-}
-
-/* Twinkle */
-@keyframes twinkle {
-  0%, 100% { opacity: 0.3; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-
-.twinkle {
-  animation: twinkle 2s ease-in-out infinite;
-}
-
-/* Responsive typography */
-@media (max-width: 640px) {
-  h1 {
-    font-size: 2rem;
-  }
+/* Tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
 }
