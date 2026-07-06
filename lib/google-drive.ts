@@ -1,25 +1,23 @@
 // ============================================================
 // Google Drive Integration
-// Server-side only – handles file uploads via service account
+// Uses OAuth2 refresh token (works with personal Google Drive)
 // ============================================================
 
 import { google } from "googleapis";
 import { Readable } from "stream";
 
 function getDriveClient() {
-  const credentials = {
-    type: "service_account",
-    client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL!,
-    private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n")!,
-    project_id: process.env.GOOGLE_PROJECT_ID,
-  };
+  const oauth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    "https://developers.google.com/oauthplayground"
+  );
 
-  const auth = new google.auth.GoogleAuth({
-    credentials,
-    scopes: ["https://www.googleapis.com/auth/drive"],
+  oauth2Client.setCredentials({
+    refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
   });
 
-  return google.drive({ version: "v3", auth });
+  return google.drive({ version: "v3", auth: oauth2Client });
 }
 
 export async function uploadFileToDrive({
