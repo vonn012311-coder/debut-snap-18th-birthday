@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8A0BF"/>
+      <stop offset="100%" stop-color="#C9A0DC"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="50%" stop-color="#F5D060"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+  </defs>
+  <!-- Background rounded square -->
+  <rect width="180" height="180" rx="40" fill="url(#bg)"/>
+  <!-- Crown -->
+  <path d="M55 68 L72 90 L90 60 L108 90 L125 68 L116 102 L64 102 Z" fill="url(#gold)"/>
+  <!-- Crown dots -->
+  <circle cx="55" cy="68" r="6" fill="url(#gold)"/>
+  <circle cx="90" cy="60" r="6" fill="url(#gold)"/>
+  <circle cx="125" cy="68" r="6" fill="url(#gold)"/>
+  <!-- Camera body -->
+  <rect x="50" y="105" width="80" height="52" rx="12" fill="white" opacity="0.9"/>
+  <!-- Camera lens -->
+  <circle cx="90" cy="131" r="16" fill="url(#gold)"/>
+  <circle cx="90" cy="131" r="10" fill="white" opacity="0.8"/>
+  <circle cx="90" cy="131" r="5" fill="url(#bg)"/>
+  <!-- Camera notch -->
+  <rect x="74" y="98" width="32" height="10" rx="5" fill="white" opacity="0.9"/>
+  <!-- Flash dot -->
+  <circle cx="120" cy="112" r="4" fill="white" opacity="0.8"/>
+</svg>

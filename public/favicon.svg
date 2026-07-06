@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37" />
+      <stop offset="50%" stop-color="#F5D060" />
+      <stop offset="100%" stop-color="#B76E79" />
+    </linearGradient>
+    <linearGradient id="pink-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E8A0BF" />
+      <stop offset="100%" stop-color="#C9A0DC" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <circle cx="50" cy="50" r="46" fill="url(#pink-grad)" opacity="0.15" />
+  <circle cx="50" cy="50" r="42" fill="none" stroke="url(#gold-grad)" stroke-width="2" stroke-dasharray="4 2" />
+  
+  <!-- Crown Icon at the top -->
+  <path d="M35 38 L42.5 48 L50 35 L57.5 48 L65 38 L60 55 L40 55 Z" fill="url(#gold-grad)" filter="url(#glow)" />
+  
+  <!-- Camera Icon at the center -->
+  <rect x="30" y="52" width="40" height="26" rx="6" fill="url(#gold-grad)" />
+  <rect x="42" y="47" width="16" height="5" rx="2" fill="url(#gold-grad)" />
+  <circle cx="50" cy="65" r="8" fill="#FFF9F5" />
+  <circle cx="50" cy="65" r="5" fill="url(#gold-grad)" />
+  <circle cx="64" cy="57" r="2" fill="#FFF9F5" />
+</svg>
