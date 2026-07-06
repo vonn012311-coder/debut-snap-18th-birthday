@@ -307,9 +307,10 @@ export default function HomePage() {
                             )}
                             <button
                               onClick={(e) => { e.stopPropagation(); removeFile(pf.id); }}
-                              className="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-black/60 items-center justify-center hidden group-hover:flex"
+                              className="absolute top-0.5 right-0.5 w-5 h-5 rounded-full bg-black/70 flex items-center justify-center"
+                              style={{ touchAction: "manipulation" }}
                             >
-                              <X size={8} className="text-white" />
+                              <X size={10} className="text-white" />
                             </button>
                           </motion.div>
                         ))}
