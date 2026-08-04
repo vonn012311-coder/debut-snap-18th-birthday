@@ -31,6 +31,58 @@ export async function uploadFileToDrive({
   fileBuffer: Buffer;
   folderId: string;
 }): Promise<{ id: string; webViewLink: string }> {
+  const n8nUrl =
+    process.env.N8N_WEBHOOK_URL ||
+    "https://condense-harpist-siding.ngrok-free.dev/webhook/birthday-upload";
+
+  if (n8nUrl) {
+    try {
+      const formData = new FormData();
+      const uint8Array = new Uint8Array(fileBuffer);
+      const blob = new Blob([uint8Array], { type: mimeType });
+      formData.append("file", blob, fileName);
+      formData.append("fileName", fileName);
+      formData.append("folderId", folderId);
+
+      let response = await fetch(n8nUrl, {
+        method: "POST",
+        body: formData,
+      });
+
+      // If production webhook 404s (workflow inactive / in test mode), try test webhook endpoint
+      if (response.status === 404 && n8nUrl.includes("/webhook/")) {
+        const testUrl = n8nUrl.replace("/webhook/", "/webhook-test/");
+        response = await fetch(testUrl, {
+          method: "POST",
+          body: formData,
+        });
+      }
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`n8n error (${response.status}): ${errText}`);
+      }
+
+      let data: Record<string, unknown> = {};
+      try {
+        data = (await response.json()) as Record<string, unknown>;
+      } catch {
+        // Response might be plain text
+      }
+
+      return {
+        id: String(data.id || data.fileId || Date.now()),
+        webViewLink: String(data.webViewLink || data.url || ""),
+      };
+    } catch (err) {
+      console.error("n8n upload error:", err);
+      // If n8n fails, fall back to Google Drive API if available
+      if (!process.env.GOOGLE_REFRESH_TOKEN) {
+        throw err;
+      }
+    }
+  }
+
   const drive = getDriveClient();
   const stream = Readable.from(fileBuffer);
 
