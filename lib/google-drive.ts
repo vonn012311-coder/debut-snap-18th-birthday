@@ -44,8 +44,14 @@ export async function uploadFileToDrive({
       formData.append("fileName", fileName);
       formData.append("folderId", folderId);
 
+      const reqHeaders = {
+        "ngrok-skip-browser-warning": "true",
+        "User-Agent": "DebutSnapApp/1.0",
+      };
+
       let response = await fetch(n8nUrl, {
         method: "POST",
+        headers: reqHeaders,
         body: formData,
       });
 
@@ -54,13 +60,22 @@ export async function uploadFileToDrive({
         const testUrl = n8nUrl.replace("/webhook/", "/webhook-test/");
         response = await fetch(testUrl, {
           method: "POST",
+          headers: reqHeaders,
           body: formData,
         });
       }
 
       if (!response.ok) {
         const errText = await response.text();
-        throw new Error(`n8n error (${response.status}): ${errText}`);
+        let errMsg = `n8n webhook error (${response.status})`;
+        try {
+          const parsed = JSON.parse(errText);
+          if (parsed.message) errMsg += `: ${parsed.message}`;
+          else if (parsed.hint) errMsg += `: ${parsed.hint}`;
+        } catch {
+          if (errText) errMsg += `: ${errText.substring(0, 150)}`;
+        }
+        throw new Error(errMsg);
       }
 
       let data: Record<string, unknown> = {};
@@ -76,10 +91,7 @@ export async function uploadFileToDrive({
       };
     } catch (err) {
       console.error("n8n upload error:", err);
-      // If n8n fails, fall back to Google Drive API if available
-      if (!process.env.GOOGLE_REFRESH_TOKEN) {
-        throw err;
-      }
+      throw err; // Throw n8n error directly so user sees why n8n failed
     }
   }
 
